@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Comparator;
 
 public class Main
 {
@@ -36,6 +37,7 @@ public class Main
                     output(book);
                     break;
                 case SORT_LIST:
+                    prepToSortList(book, scanner);
                     break;
                 case EXIT:
                     break;
@@ -45,6 +47,46 @@ public class Main
             }
         }
 	}
+	
+  public static void PrepToSortList(List<Book> book, Scanner scanner) {
+      int size = book.size();
+        checkListSize(size);
+        if (size != 0) {
+            sortList(book, scanner);
+        }
+
+    }
+    
+  public static void sortList(List<Book> book, Scanner scanner) {
+        int choice = 0;
+      while (choice != 6) {
+        Book.printAttributes();
+        choice = scanner.nextInt();
+        scanner.nextLine();
+        switch (choice) {
+            case 1:
+                book.sort(Comparator.comparing(Book::getTitle));
+                break;
+            case 2:
+                book.sort(Comparator.comparing(Book::getGenre));
+                break;
+            case 3:
+                book.sort(Comparator.comparingInt(Book::getPages));
+                break;
+            case 4:
+                book.sort(Comparator.comparingDouble(Book::getWordPerPage));
+                break;
+            case 5:
+                output(book);
+                break;
+            case 6:
+                break;
+            default:
+                printErrorInput();
+                break;
+        }
+      }
+  }
 
   public static void output(List<Book> book){
       int size = book.size();
@@ -65,7 +107,6 @@ public class Main
             choice = getBookIndex(size, scanner);
             book.get(choice - 1).modify();
         }
-
   }
   
   public static void printEditMenu() {
@@ -255,11 +296,11 @@ public class Main
 	        return "Введено число меньшее или равное нулю, Оставлены предыдущие данные:";
 	    }
 	    
-	    public void printAttributes() {
-            System.out.printf("\n1. Изменить название книги\n");
-            System.out.printf("2. Изменить жанр\n");
-            System.out.printf("3. Изменить количество страниц\n");
-            System.out.printf("4. Изменить количестов слов на страницу\n");
+	    public static void printAttributes() {
+            System.out.printf("\n1. Название книги\n");
+            System.out.printf("2. Жанр\n");
+            System.out.printf("3. Количество страниц\n");
+            System.out.printf("4. Количестов слов на страницу\n");
             System.out.printf("5. Вывести текущие данные\n");
             System.out.printf("6. Закончить ввод\n");
 	    }
