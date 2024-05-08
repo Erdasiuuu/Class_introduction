@@ -22,6 +22,7 @@ public class Main
             switch (choice) {
                 case ADD_EMPTY_OBJECT:
                     book.add(new Book());
+                    System.out.printf("\nДобавлена книга со значениями по умолчанию\n\n");
                     break;
                 case ADD_OBJECT:
                     Book tmp = new Book();
@@ -29,6 +30,7 @@ public class Main
                     book.add(tmp);
                     break;
                 case EDIT_OBJECT:
+                    prepareForEdit(book, scanner);
                     break;
                 case OUTPUT_LIST:
                     output(book);
@@ -46,15 +48,57 @@ public class Main
 
   public static void output(List<Book> book){
       int size = book.size();
+      checkListSize(size);
+      for (int i = 0; i < size; i++) {
+          System.out.printf("\n%d: %s\n", i + 1, book.get(i));
+      }
+      if (size != 0) {
+        System.out.printf("\n");
+      }
+  }
+  
+  public static void prepareForEdit(List<Book> book, Scanner scanner) {
+      int choice = 0;
+      int size = book.size();
+        checkListSize(size);
+        if (size != 0) {
+            choice = getBookIndex(size, scanner);
+            book.get(choice - 1).modify();
+        }
+
+  }
+  
+  public static void printEditMenu() {
+    System.out.printf("Введите один из вариантов меню.\n");
+    System.out.printf("1. Добавить пустой объект к массиву \n");
+    System.out.printf("2. Добавить объект к массиву, заполненный вручную\n");
+    System.out.printf("3. Редактировать значения\n");
+    System.out.printf("4. Вывод информации про все объекты\n");
+    System.out.printf("5. Сортировка массива\n");
+    System.out.printf("6. Завершение программы\n");
+  }
+  
+  public static void checkListSize(int size) {
       if (size == 0) {
             System.out.printf("\nНет введенных данных\n\n");
       }
-      else {
-          for (int i = 0; i < size; i++) {
-              System.out.printf("\n%s\n", book.get(i));
+  }
+  
+  public static int getBookIndex(int size, Scanner scanner) {
+      int choice = 0;
+      while (choice <= 0 || choice > size) {
+          printIndexFindMenu(size);
+          choice = scanner.nextInt();
+          scanner.nextLine();
+          if (choice <= 0 || choice > size) {
+              printErrorInput();
           }
-          System.out.printf("\n");
       }
+      return choice;
+  }
+
+  public static void printIndexFindMenu(int size) {
+    System.out.printf("\nВведите номер книги. Общее количество книг: %d. Отсчет начинается с 1\n", size);
   }
 
   public static void printMenu() {
@@ -146,12 +190,13 @@ public class Main
 	                    checkWordPerPage();
 	                    break;
 	                case 5:
-	                    System.out.printf("Текущие данные:\n%s\n", this);
+	                    currentData();
 	                    break;
 	                case 6:
 	                    break;
 	                default:
 	                    printErrorInput();
+	                    break;
 	            }
 	        }
 	    }
@@ -164,6 +209,10 @@ public class Main
             else {
                 setTitle(title);
             }
+	    }
+	    
+	    public void currentData() {
+	        System.out.printf("\n%s\n", this);
 	    }
 	    
 	    private void checkGenre() {
@@ -207,16 +256,21 @@ public class Main
 	    }
 	    
 	    public void printAttributes() {
-            System.out.printf("\n1. Добавить название книги\n");
-            System.out.printf("2. Добавить жанр\n");
-            System.out.printf("3. Добавить количество страниц\n");
-            System.out.printf("4. Вывод информации про все объекты\n");
-            System.out.printf("5. Закончить ввод\n");
+            System.out.printf("\n1. Изменить название книги\n");
+            System.out.printf("2. Изменить жанр\n");
+            System.out.printf("3. Изменить количество страниц\n");
+            System.out.printf("4. Изменить количестов слов на страницу\n");
+            System.out.printf("5. Вывести текущие данные\n");
+            System.out.printf("6. Закончить ввод\n");
+	    }
+	    
+	    private double wordCount(int pages, double wordPerPage) {
+	        return pages * wordPerPage;
 	    }
 	    
 	    @Override
 	    public String toString() {
-	        return "Title: " + title + " Genre: " + genre + " Pages: " + pages + " wordPerPage: " + wordPerPage;
+	        return "Title: " + title + " Genre: " + genre + " Pages: " + pages + " wordPerPage: " + wordPerPage + " wordCount " + wordCount(pages, wordPerPage);
 	    }
 	}
 }
