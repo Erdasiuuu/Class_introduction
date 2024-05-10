@@ -10,12 +10,22 @@ public class Book {
   private double wordPerPage;
   private Scanner scanner = new Scanner(System.in);
 
+  /**
+   * @brief Конструктор по умолчанию
+   *
+   */
+
   public Book() {
     title = "title";
     genre = "genre";
     pages = 100;
     wordPerPage = 100;
   }
+
+  /**
+   * @brief Конструктор с параметрами
+   *
+   */
 
   public Book(String title, String genre, int pages, double wordPerPage) {
     this.title = title;
@@ -24,23 +34,47 @@ public class Book {
     this.wordPerPage = wordPerPage;
   }
 
-  public String getTitle() { return title; }
+  /**
+   * @brief Геттеры/Сеттеры
+   *
+   */
 
-  public void setTitle(String title) { this.title = title; }
+  public String getTitle() {
+    return title;
+  }
 
-  public String getGenre() { return genre; }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-  public void setGenre(String genre) { this.genre = genre; }
+  public String getGenre() {
+    return genre;
+  }
 
-  public int getPages() { return pages; }
+  public void setGenre(String genre) {
+    this.genre = genre;
+  }
 
-  public void setPages(int pages) { this.pages = pages; }
+  public int getPages() {
+    return pages;
+  }
 
-  public double getWordPerPage() { return wordPerPage; }
+  public void setPages(int pages) {
+    this.pages = pages;
+  }
+
+  public double getWordPerPage() {
+    return wordPerPage;
+  }
 
   public void setWordPerPage(double wordPerPage) {
     this.wordPerPage = wordPerPage;
   }
+
+  /**
+   * @brief Предварительная проверка на не пустой список
+   *
+   */
 
   public static void prepareForEdit(List<Book> book, Scanner scanner) {
     int choice = 0;
@@ -51,6 +85,11 @@ public class Book {
       book.get(choice - 1).modify();
     }
   }
+
+  /**
+   * @brief Получаем индекс для дальнейшего редактирования
+   *
+   */
 
   private static int getBookIndex(int size, Scanner scanner) {
     int choice = 0;
@@ -65,11 +104,21 @@ public class Book {
     return choice;
   }
 
+  /**
+   * @brief Функция сообщает о пустом списке
+   *
+   */
+
   private static void checkListSize(int size) {
     if (size == 0) {
       System.out.printf("\nНет введенных данных\n\n");
     }
   }
+
+  /**
+   * @brief Меню для выбора поля для дальнейшего редактирования
+   *
+   */
 
   public void modify() {
     int choice = 0;
@@ -78,29 +127,34 @@ public class Book {
       choice = scanner.nextInt();
       scanner.nextLine();
       switch (choice) {
-      case 1:
-        checkTitle();
-        break;
-      case 2:
-        checkGenre();
-        break;
-      case 3:
-        checkPages();
-        break;
-      case 4:
-        checkWordPerPage();
-        break;
-      case 5:
-        currentData();
-        break;
-      case 6:
-        break;
-      default:
-        printErrorInput();
-        break;
+        case 1:
+          checkTitle();
+          break;
+        case 2:
+          checkGenre();
+          break;
+        case 3:
+          checkPages();
+          break;
+        case 4:
+          checkWordPerPage();
+          break;
+        case 5:
+          currentData();
+          break;
+        case 6:
+          break;
+        default:
+          printErrorInput();
+          break;
       }
     }
   }
+
+  /**
+   * @brief Проверка списка на пустоту перед сортировкой
+   *
+   */
 
   public static void prepareToSortList(List<Book> book, Scanner scanner) {
     int size = book.size();
@@ -110,6 +164,11 @@ public class Book {
     }
   }
 
+  /**
+   * @brief Меню полей для сортировки
+   *
+   */
+
   private static void sortList(List<Book> book, Scanner scanner) {
     int choice = 0;
     while (choice != 6) {
@@ -117,29 +176,34 @@ public class Book {
       choice = scanner.nextInt();
       scanner.nextLine();
       switch (choice) {
-      case 1:
-        book.sort(Comparator.comparing(Book::getTitle));
-        break;
-      case 2:
-        book.sort(Comparator.comparing(Book::getGenre));
-        break;
-      case 3:
-        book.sort(Comparator.comparingInt(Book::getPages));
-        break;
-      case 4:
-        book.sort(Comparator.comparingDouble(Book::getWordPerPage));
-        break;
-      case 5:
-        output(book);
-        break;
-      case 6:
-        break;
-      default:
-        printErrorInput();
-        break;
+        case 1:
+          book.sort(Comparator.comparing(Book::getTitle));
+          break;
+        case 2:
+          book.sort(Comparator.comparing(Book::getGenre));
+          break;
+        case 3:
+          book.sort(Comparator.comparingInt(Book::getPages));
+          break;
+        case 4:
+          book.sort(Comparator.comparingDouble(Book::getWordPerPage));
+          break;
+        case 5:
+          output(book);
+          break;
+        case 6:
+          break;
+        default:
+          printErrorInput();
+          break;
       }
     }
   }
+
+  /**
+   * @brief Вывод полей каждого объекта из списка
+   *
+   */
 
   public static void output(List<Book> book) {
     int size = book.size();
@@ -152,10 +216,14 @@ public class Book {
     }
   }
 
+  /**
+   * @brief Информационные выводы
+   *
+   */
+
   private static void printIndexFindMenu(int size) {
     System.out.printf(
-        "\nВведите номер книги. Общее количество книг: %d. Отсчет начинается с 1\n",
-        size);
+        "\nВведите номер книги. Общее количество книг: %d. Отсчет начинается с 1\n", size);
   }
 
   public static void printMenu() {
@@ -187,7 +255,14 @@ public class Book {
     System.out.printf("6. Завершение программы\n");
   }
 
-  public void currentData() { System.out.printf("\n%s\n", this); }
+  public void currentData() {
+    System.out.printf("\n%s\n", this);
+  }
+
+  /**
+   * @brief Проверка на корректный ввод данных перед редактированием поля
+   *
+   */
 
   private void checkTitle() {
     String title = scanner.nextLine();
@@ -245,8 +320,7 @@ public class Book {
 
   @Override
   public String toString() {
-    return "Title: " + title + " Genre: " + genre + " Pages: " + pages +
-        " wordPerPage: " + wordPerPage + " wordCount " +
-        wordCount(pages, wordPerPage);
+    return "Title: " + title + " Genre: " + genre + " Pages: " + pages
+        + " wordPerPage: " + wordPerPage + " wordCount " + wordCount(pages, wordPerPage);
   }
 }

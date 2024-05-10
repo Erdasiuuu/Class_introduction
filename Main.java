@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
   /**
    * @brief Константные переменные для дальнейшего использования
    *
@@ -44,29 +43,29 @@ public class Main {
       choice = scanner.nextInt();
       scanner.nextLine();
       switch (choice) {
-      case ADD_EMPTY_OBJECT:
-        book.add(new Book());
-        System.out.printf("\nДобавлена книга со значениями по умолчанию\n\n");
-        break;
-      case ADD_OBJECT:
-        Book obj = new Book();
-        obj.modify();
-        book.add(obj);
-        break;
-      case EDIT_OBJECT:
-        Book.prepareForEdit(book, scanner);
-        break;
-      case OUTPUT_LIST:
-        Book.output(book);
-        break;
-      case SORT_LIST:
-        Book.prepareToSortList(book, scanner);
-        break;
-      case EXIT:
-        break;
-      default:
-        Book.printErrorInput();
-        break;
+        case ADD_EMPTY_OBJECT:
+          book.add(new Book());
+          System.out.printf("\nДобавлена книга со значениями по умолчанию\n\n");
+          break;
+        case ADD_OBJECT:
+          Book obj = new Book();
+          obj.modify();
+          book.add(obj);
+          break;
+        case EDIT_OBJECT:
+          Book.prepareForEdit(book, scanner);
+          break;
+        case OUTPUT_LIST:
+          Book.output(book);
+          break;
+        case SORT_LIST:
+          Book.prepareToSortList(book, scanner);
+          break;
+        case EXIT:
+          break;
+        default:
+          Book.printErrorInput();
+          break;
       }
     }
   }
