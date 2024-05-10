@@ -24,33 +24,19 @@ public class Book {
     this.wordPerPage = wordPerPage;
   }
 
-  public String getTitle() {
-    return title;
-  }
+  public String getTitle() { return title; }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+  public void setTitle(String title) { this.title = title; }
 
-  public String getGenre() {
-    return genre;
-  }
+  public String getGenre() { return genre; }
 
-  public void setGenre(String genre) {
-    this.genre = genre;
-  }
+  public void setGenre(String genre) { this.genre = genre; }
 
-  public int getPages() {
-    return pages;
-  }
+  public int getPages() { return pages; }
 
-  public void setPages(int pages) {
-    this.pages = pages;
-  }
+  public void setPages(int pages) { this.pages = pages; }
 
-  public double getWordPerPage() {
-    return wordPerPage;
-  }
+  public double getWordPerPage() { return wordPerPage; }
 
   public void setWordPerPage(double wordPerPage) {
     this.wordPerPage = wordPerPage;
@@ -92,26 +78,26 @@ public class Book {
       choice = scanner.nextInt();
       scanner.nextLine();
       switch (choice) {
-        case 1:
-          checkTitle();
-          break;
-        case 2:
-          checkGenre();
-          break;
-        case 3:
-          checkPages();
-          break;
-        case 4:
-          checkWordPerPage();
-          break;
-        case 5:
-          currentData();
-          break;
-        case 6:
-          break;
-        default:
-          printErrorInput();
-          break;
+      case 1:
+        checkTitle();
+        break;
+      case 2:
+        checkGenre();
+        break;
+      case 3:
+        checkPages();
+        break;
+      case 4:
+        checkWordPerPage();
+        break;
+      case 5:
+        currentData();
+        break;
+      case 6:
+        break;
+      default:
+        printErrorInput();
+        break;
       }
     }
   }
@@ -131,26 +117,26 @@ public class Book {
       choice = scanner.nextInt();
       scanner.nextLine();
       switch (choice) {
-        case 1:
-          book.sort(Comparator.comparing(Book::getTitle));
-          break;
-        case 2:
-          book.sort(Comparator.comparing(Book::getGenre));
-          break;
-        case 3:
-          book.sort(Comparator.comparingInt(Book::getPages));
-          break;
-        case 4:
-          book.sort(Comparator.comparingDouble(Book::getWordPerPage));
-          break;
-        case 5:
-          output(book);
-          break;
-        case 6:
-          break;
-        default:
-          printErrorInput();
-          break;
+      case 1:
+        book.sort(Comparator.comparing(Book::getTitle));
+        break;
+      case 2:
+        book.sort(Comparator.comparing(Book::getGenre));
+        break;
+      case 3:
+        book.sort(Comparator.comparingInt(Book::getPages));
+        break;
+      case 4:
+        book.sort(Comparator.comparingDouble(Book::getWordPerPage));
+        break;
+      case 5:
+        output(book);
+        break;
+      case 6:
+        break;
+      default:
+        printErrorInput();
+        break;
       }
     }
   }
@@ -168,7 +154,8 @@ public class Book {
 
   private static void printIndexFindMenu(int size) {
     System.out.printf(
-        "\nВведите номер книги. Общее количество книг: %d. Отсчет начинается с 1\n", size);
+        "\nВведите номер книги. Общее количество книг: %d. Отсчет начинается с 1\n",
+        size);
   }
 
   public static void printMenu() {
@@ -200,9 +187,7 @@ public class Book {
     System.out.printf("6. Завершение программы\n");
   }
 
-  public void currentData() {
-    System.out.printf("\n%s\n", this);
-  }
+  public void currentData() { System.out.printf("\n%s\n", this); }
 
   private void checkTitle() {
     String title = scanner.nextLine();
@@ -241,7 +226,7 @@ public class Book {
       setWordPerPage(wordPerPage);
     }
   }
-  
+
   public static void printErrorInput() {
     System.out.printf("\nНеверный ввод. Попробуйте еще раз\n");
   }
@@ -260,7 +245,8 @@ public class Book {
 
   @Override
   public String toString() {
-    return "Title: " + title + " Genre: " + genre + " Pages: " + pages
-        + " wordPerPage: " + wordPerPage + " wordCount " + wordCount(pages, wordPerPage);
+    return "Title: " + title + " Genre: " + genre + " Pages: " + pages +
+        " wordPerPage: " + wordPerPage + " wordCount " +
+        wordCount(pages, wordPerPage);
   }
 }
