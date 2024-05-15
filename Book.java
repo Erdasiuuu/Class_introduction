@@ -47,8 +47,8 @@ public class Book {
     if (title.length() == 0) {
       System.out.printf("%s %s", incorrectStr(), this.title);
     } else {
-    	this.title = title;
-   }
+      this.title = title;
+    }
   }
 
   public String getGenre() {
@@ -59,7 +59,7 @@ public class Book {
     if (genre.length() == 0) {
       System.out.printf("%s %s", incorrectStr(), this.genre);
     } else {
-    	this.genre = genre;
+      this.genre = genre;
     }
   }
 
@@ -71,7 +71,7 @@ public class Book {
     if (pages <= 0) {
       System.out.printf("%s %d", incorrectNum(), this.pages);
     } else {
-    	this.pages = pages;
+      this.pages = pages;
     }
   }
 
@@ -83,7 +83,7 @@ public class Book {
     if (wordPerPage <= 0) {
       System.out.printf("%s %f", incorrectNum(), this.wordPerPage);
     } else {
-    	this.wordPerPage = wordPerPage;
+      this.wordPerPage = wordPerPage;
     }
   }
 
@@ -144,22 +144,22 @@ public class Book {
       scanner.nextLine();
       switch (choice) {
         case 1:
-    	String title = scanner.nextLine();
-	  setTitle(title);
+          String title = scanner.nextLine();
+          setTitle(title);
           break;
         case 2:
-    	String genre = scanner.nextLine();
-	setGenre(genre);
+          String genre = scanner.nextLine();
+          setGenre(genre);
           break;
         case 3:
-    int pages = scanner.nextInt();
-    scanner.nextLine();
-    setPages(pages);
+          int pages = scanner.nextInt();
+          scanner.nextLine();
+          setPages(pages);
           break;
         case 4:
-    double wordPerPage = scanner.nextDouble();
-    scanner.nextLine();
-    setWordPerPage(wordPerPage);
+          double wordPerPage = scanner.nextDouble();
+          scanner.nextLine();
+          setWordPerPage(wordPerPage);
           break;
         case 5:
           currentData();
@@ -286,8 +286,7 @@ public class Book {
    *
    */
 
-  private void checkWordPerPage() {
-  }
+  private void checkWordPerPage() {}
 
   public static void printErrorInput() {
     System.out.printf("\nНеверный ввод. Попробуйте еще раз\n");
