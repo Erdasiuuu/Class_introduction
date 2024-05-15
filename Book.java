@@ -44,7 +44,11 @@ public class Book {
   }
 
   public void setTitle(String title) {
-    this.title = title;
+    if (title.length() == 0) {
+      System.out.printf("%s %s", incorrectStr(), this.title);
+    } else {
+    	this.title = title;
+   }
   }
 
   public String getGenre() {
@@ -52,7 +56,11 @@ public class Book {
   }
 
   public void setGenre(String genre) {
-    this.genre = genre;
+    if (genre.length() == 0) {
+      System.out.printf("%s %s", incorrectStr(), this.genre);
+    } else {
+    	this.genre = genre;
+    }
   }
 
   public int getPages() {
@@ -60,7 +68,11 @@ public class Book {
   }
 
   public void setPages(int pages) {
-    this.pages = pages;
+    if (pages <= 0) {
+      System.out.printf("%s %d", incorrectNum(), this.pages);
+    } else {
+    	this.pages = pages;
+    }
   }
 
   public double getWordPerPage() {
@@ -68,7 +80,11 @@ public class Book {
   }
 
   public void setWordPerPage(double wordPerPage) {
-    this.wordPerPage = wordPerPage;
+    if (wordPerPage <= 0) {
+      System.out.printf("%s %f", incorrectNum(), this.wordPerPage);
+    } else {
+    	this.wordPerPage = wordPerPage;
+    }
   }
 
   /**
@@ -128,16 +144,22 @@ public class Book {
       scanner.nextLine();
       switch (choice) {
         case 1:
-          checkTitle();
+    	String title = scanner.nextLine();
+	  setTitle(title);
           break;
         case 2:
-          checkGenre();
+    	String genre = scanner.nextLine();
+	setGenre(genre);
           break;
         case 3:
-          checkPages();
+    int pages = scanner.nextInt();
+    scanner.nextLine();
+    setPages(pages);
           break;
         case 4:
-          checkWordPerPage();
+    double wordPerPage = scanner.nextDouble();
+    scanner.nextLine();
+    setWordPerPage(wordPerPage);
           break;
         case 5:
           currentData();
@@ -264,42 +286,7 @@ public class Book {
    *
    */
 
-  private void checkTitle() {
-    String title = scanner.nextLine();
-    if (title.length() == 0) {
-      System.out.printf("%s %s", incorrectStr(), this.title);
-    } else {
-      setTitle(title);
-    }
-  }
-
-  private void checkGenre() {
-    String genre = scanner.nextLine();
-    if (genre.length() == 0) {
-      System.out.printf("%s %s", incorrectStr(), this.genre);
-    } else {
-      setGenre(genre);
-    }
-  }
-
-  private void checkPages() {
-    int pages = scanner.nextInt();
-    scanner.nextLine();
-    if (pages <= 0) {
-      System.out.printf("%s %d", incorrectNum(), this.pages);
-    } else {
-      setPages(pages);
-    }
-  }
-
   private void checkWordPerPage() {
-    double wordPerPage = scanner.nextDouble();
-    scanner.nextLine();
-    if (wordPerPage <= 0) {
-      System.out.printf("%s %f", incorrectNum(), this.wordPerPage);
-    } else {
-      setWordPerPage(wordPerPage);
-    }
   }
 
   public static void printErrorInput() {
